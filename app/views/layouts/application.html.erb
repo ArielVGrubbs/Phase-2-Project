@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Puninterested</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<%= stylesheet_link_tag    'application', media: 'all' %>
+		<noscript><link rel="stylesheet" href="assets/stylesheets/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+							<!-- Logo -->
+								<a href="/posts" class="logo">
+									<span class="symbol"><img src="data:image/png;base64,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" alt="" /></span><span id="uninterested" class="title">uninterested</span>
+								</a>
+							<!-- User Show Page -->
+								<% if current_user %>
+									<span id="usernametop" class="title"><%= link_to current_user.name, user_path(current_user) %></span>
+								<% end %>
+						</div>
+					</header>
+
+				<!-- Menu -->
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							
+							<%= yield %>
+
+						</div>
+
+	</body>
+</html>

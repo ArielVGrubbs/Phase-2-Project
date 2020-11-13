@@ -1,0 +1,40 @@
+<div id="main">
+	<div class="inner">
+		<header>
+			<h1>Welcome to Puninterested, the social media application for the less than enthused.<br /></h1>
+			<p>Inspired by, but in no way affiliated with Pinterest.</p>
+        </header>
+    </div>
+</div>
+<section class="tiles">
+	<% @posts.each do |post| %>
+        <article class=<%="style" + rand(1..6).to_s%>>
+            <span class="image">
+                <img src=<%=post.image%> alt="" />
+                <a href="/posts/<%=post.id%>">
+                    <h2><%=post.title%></h2>
+                <div class="content">
+					<p>By: <%= post.user.name %></p>
+				</div>
+            </a>
+            </span>
+            <a href="/posts/<%=post.id%>">
+                    <h2><%=post.title%></h2>
+                <div class="content">
+					<p>By: <%= post.user.name %></p>
+				</div>
+            </a>
+        </article>
+    <% end %>
+</section>
+
+<br><br><br>
+<% if current_user %>
+    <%= form_tag new_post_path, method: "get" do %>
+        <%= submit_tag "Create a New Post" %>
+    <% end %>
+<% else %>
+    <%= form_tag new_session_path, method: "get" do %>
+        <%= submit_tag "Login" %>
+    <% end %>
+<% end %>

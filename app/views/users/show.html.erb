@@ -1,0 +1,94 @@
+<h1><%= @user.name %></h1>
+<% if @user.profile_picture %>
+    <img src=<%=@user.profile_picture%>></a><br><br>
+<% end %>
+<h3>Username: <%= @user.username %></h3>
+
+<% if @user.id == current_user.id %>
+
+    <div class="aboutme" >
+        <h3>About Me: </h3>
+        <p><%= @user.about %></p>
+
+    <h3>My Posts: </h3>
+    <ul><% @user.posts.each do |post| %>
+        <li><%= link_to post.title, post_path(post) %></li>
+    <% end %>
+    </ul>
+
+    <h3>My Liked Posts: </h3>
+    <ul><% Post.all.each do |post| %>
+        <% if post.likes.find { |like| like.user_id == current_user.id} %>
+            <li><%= link_to post.title, post_path(post) %></li>
+        <% end %>
+    <% end %>
+    </ul>
+
+    <h3>My Commented Posts: </h3>
+    <ul><% Post.all.each do |post| %>
+        <% if post.comments.find { |comment| comment.user_id == current_user.id} %>
+            <li><%= link_to post.title, post_path(post) %></li>
+        <% end %>
+    <% end %>
+    </ul>
+    </div>
+    
+    <div id="grayline">
+    </div><br>
+
+    <div class="edit_delete">
+        <div class="edit">
+            <%= form_tag logout_path, method: "get" do %>
+                <%= submit_tag "Logout" %>
+            <% end %>
+        </div>
+
+        <%= form_tag edit_user_path, method: "get" do %>
+            <%= submit_tag "Edit Profile" %>
+        <% end %> 
+    </div><br>
+
+    <div id="grayline">
+    </div><br>
+<% end %>
+
+<% if @user.id != current_user.id %>
+
+    <p>About <%= @user.name %>: </p>
+    <p><%= @user.about %></p>
+
+    <p><%= @user.name %>'s Posts: </p>
+    <ul><% @user.posts.each do |post| %>
+        <li><%= link_to post.title, post_path(post) %></li>
+    <% end %>
+    </ul>
+
+    <p><%= @user.name %>'s Liked Posts: </p>
+    <ul><% Post.all.each do |post| %>
+        <% if post.likes.find { |like| like.user_id == @user.id} %>
+            <li><%= link_to post.title, post_path(post) %></li>
+        <% end %>
+    <% end %>
+    </ul>
+
+    <p><%= @user.name %>'s Commented Posts: </p>
+    <ul><% Post.all.each do |post| %>
+        <% if post.comments.find { |comment| comment.user_id == @user.id} %>
+            <li><%= link_to post.title, post_path(post) %></li>
+        <% end %>
+    <% end %>
+    </ul>
+<% end %>
+
+<div class="edit_delete">
+    <div class="edit">
+        <%= form_tag posts_path, method: "get" do %>
+            <%= submit_tag "All Posts" %>
+        <% end %> 
+    </div>
+
+    <%= form_tag new_post_path, method: "get" do %>
+        <%= submit_tag "Create a New Post" %>
+    <% end %> 
+</div>
+

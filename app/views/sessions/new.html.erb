@@ -1,0 +1,11 @@
+<% if flash[:errors] %>
+<div style='color: red' id="error_explanation">
+  <%= flash[:errors] %>
+</div><br>
+<% end %>
+
+<%= form_with url: sessions_path do |f| %>
+    Username: <%= f.text_field :username %> <br /><br />
+    Password: <%= f.password_field :password %><br /><br />
+    <%= f.submit "Login" %>
+  <% end %>

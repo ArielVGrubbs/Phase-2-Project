@@ -1,0 +1,28 @@
+<h1>User Sign Up</h1>
+
+<% if flash[:errors] %>
+  <div style='color: red' id="error_explanation">
+    <h2>
+      <%= pluralize(flash[:errors].count, "error") %>
+      prohibited this article from being saved:
+    </h2>
+
+    <ul>
+    <% flash[:errors].each do |k,v| %>
+      <li><%= "#{k} #{v[0]}" %></li>
+    <% end %>
+    </ul>
+  </div><br>
+<% end %>
+
+<%= form_for(@user) do |f| %>
+    Name: <%= f.text_field :name %><br>
+    Username: <%= f.text_field :username %><br>
+    Profile picture: <%= f.text_field :profile_picture %><br>
+    Password: <%= f.password_field :password %><br>
+    Password Confirmation: <%= f.password_field :password_confirmation %><br>
+    <%= f.submit "Sign Up" %>
+<% end %>
+<%= form_tag new_session_path, method: "get" do %>
+  <%= submit_tag "Login" %>
+<% end %> 
